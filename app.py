@@ -11,7 +11,7 @@ db = client['stock_db']
 
 @app.route('/')
 def index():
-    # Fetch stock data
+    # Fetch stock data 
     stock_data = list(db['stock_data'].find().limit(100))
 
     # Extract data for plotting (timestamp, price, volume, rolling_avg_10, rolling_avg_30)
