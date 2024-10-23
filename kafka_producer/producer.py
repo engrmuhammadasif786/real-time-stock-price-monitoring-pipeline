@@ -2,8 +2,13 @@ from kafka import KafkaProducer
 import requests
 import json
 import time
+import os
+from dotenv import load_dotenv
 
-API_KEY = 'LAJQK6IKUG950JBO'
+# Load environment variables
+load_dotenv()
+
+API_KEY = os.getenv('ALPHAVANTAGE_API_KEY')
 STOCK_SYMBOL = 'AAPL'
 KAFKA_TOPIC = 'stock_prices'
 KAFKA_SERVER = 'kafka:9092'  

@@ -14,7 +14,7 @@ def index():
     # Fetch stock data
     stock_data = list(db['stock_data'].find().limit(100))
 
-    # Extract data for plotting (timestamp, price, volume)
+    # Extract data for plotting (timestamp, price, volume, rolling_avg_10, rolling_avg_30)
     timestamps = [item['timestamp'] for item in stock_data]
     prices = [item['close'] for item in stock_data]
     volumes = [item['volume'] for item in stock_data]
@@ -33,7 +33,7 @@ def index():
     rolling_avg_data_10 = [go.Scatter(x=timestamps, y=rollingAvg10, mode='lines', name='10-Day Moving Avg')]
     rolling_avg_json_10 = json.dumps(rolling_avg_data_10, cls=PlotlyJSONEncoder)
 
-    # 10 days rolling average
+    # 30 days rolling average
     rolling_avg_data_30 = [go.Scatter(x=timestamps, y=rollingAvg30, mode='lines', name='30-Day Moving Avg')]
     rolling_avg_json_30 = json.dumps(rolling_avg_data_30, cls=PlotlyJSONEncoder)
 

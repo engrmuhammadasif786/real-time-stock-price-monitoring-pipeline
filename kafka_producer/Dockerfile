@@ -7,7 +7,7 @@ WORKDIR /producer
 COPY . /producer
 
 # Install Kafka and requests dependencies
-RUN pip install kafka-python requests
+RUN pip install kafka-python requests python-dotenv
 
 # Run the Kafka producer script
 CMD ["python", "producer.py"]
