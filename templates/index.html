@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Data Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Plotly JS -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Stock Data Dashboard</h1>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Stock Price Overview</h5>
+                <div id="price-plot"></div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Volume Traded</h5>
+                <div id="volume-plot"></div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Moving Avg</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="10-day-rolling-plot"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="30-day-rolling-plot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        var priceData = {{ price_data | safe }};
+        var volumeData = {{ volume_data | safe }};
+        var rollingAvg10Days = {{ rolling_avg_json_10 | safe }};
+        var rollingAvg30Days = {{ rolling_avg_json_30 | safe }};
+        
+        // Plotting stock price
+        var priceLayout = {
+            title: 'Stock Price',
+            xaxis: { title: 'Time' },
+            yaxis: { title: 'Price (USD)' }
+        };
+        Plotly.newPlot('price-plot', priceData, priceLayout);
+
+        // Plotting volume traded
+        var volumeLayout = {
+            title: 'Volume Traded',
+            xaxis: { title: 'Time' },
+            yaxis: { title: 'Volume' }
+        };
+        Plotly.newPlot('volume-plot', volumeData, volumeLayout);
+
+        // Plotting 10 days rolling avg.
+        var rollingAvg10DaysLayout = {
+            title: '10-Day Moving Avg',
+            xaxis: { title: 'Time' },
+            yaxis: { title: 'Avg. Price (USD)' }
+        };
+        Plotly.newPlot('10-day-rolling-plot', rollingAvg10Days, rollingAvg10DaysLayout);
+
+        // Plotting 30 days rolling avg.
+        var rollingAvg30DaysLayout = {
+            title: '30-Day Moving Avg',
+            xaxis: { title: 'Time' },
+            yaxis: { title: 'Avg. Price (USD)' }
+        };
+        Plotly.newPlot('30-day-rolling-plot', rollingAvg30Days, rollingAvg30DaysLayout);
+    </script>
+</body>
+</html>
