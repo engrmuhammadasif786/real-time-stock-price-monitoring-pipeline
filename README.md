@@ -1,11 +1,17 @@
-### Building and running your application
+### Introduction
 
-When you're ready, start your application by running:
+This project involves building a stock price monitoring pipeline using Kafka for data ingestion, Spark for data transformation and MongoDB for data storage. An interactive Flask-based web dashboard with Plotly visualisations showed stock trends and volume containerized in Docker.
+
+![Architecture Diagram](https://github.com/user-attachments/assets/45dbe4bf-fc5e-4eac-ae30-596f50763cc0)
+
+### Building and running application
+
+When you're ready, start application by running:
 `docker compose up --build`.
 
-Your application will be available at http://localhost:5002.
+Application will be available at http://localhost:5002.
 
-### Deploying your application to the cloud
+### Deploying application to the cloud
 
 First, build your image, e.g.: `docker build -t myapp .`.
 If your cloud uses a different CPU architecture than your development
